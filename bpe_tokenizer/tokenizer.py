@@ -245,10 +245,12 @@ class BPETokenizer:
             json.dump(vocab_data, f, indent=2)
 
     def read_vocab(self):
-        with open("vocab.json", "r") as vocab_file:
+        with open("bpe_tokenizer/vocab.json", "r") as vocab_file:
             data = json.load(vocab_file)
 
-        self.id_to_token = {int(k): bytes(v) for k, v in data["id_to_token"].items()}
+        self.id_to_token = {
+            v: bytes(k, "utf-8") for k, v in data["id_to_token"].items()
+        }
         self.merges = {
             tuple(map(int, k.split(","))): int(v) for k, v in data["merges"].items()
         }
