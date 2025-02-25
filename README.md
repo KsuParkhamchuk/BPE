@@ -111,19 +111,6 @@ format: arrow
 1. Training tokenizer on domain-specific data
 2. Training tokenizer on general data
 
-50mb if wiki data, 17 merges, 324,6 sec
-
-![alt text](../img/image.png) 3. Training tokenizer on domain-specific data + general data
-
-500mb of wiki data, 17 merges, 6676,73 sec
-
-![alt text](../img/500mb_file_performance.png)
-
-Summary:
-
-smaller dataset is 20x faster
-17 out of 17 merges are the same
-
 Idea:
 
 Evaluate the performance of the tokenizer on domain-specific data vs general data.
