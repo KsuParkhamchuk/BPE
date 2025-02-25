@@ -1,4 +1,5 @@
 import regex as re
+import os
 from collections import Counter
 from .hyperparams import (
     GPT4_SPLIT_PATTERN,
@@ -12,6 +13,9 @@ from .hyperparams import (
 import json
 from typing import List, Tuple
 from time import time
+
+curr_dir = os.path.dirname(os.path.abspath(__file__))
+vocab_path = os.path.join(curr_dir, "vocab.json")
 
 
 class BPETokenizer:
@@ -162,7 +166,7 @@ class BPETokenizer:
 
             if i % 10 == 0:
                 self.merges = merges
-                self.save_vocab("bpe_tokenizer/vocab.json")
+                self.save_vocab(vocab_path)
 
     def encode_chunk(self, chunk: bytes) -> List[int]:
         """
@@ -245,7 +249,7 @@ class BPETokenizer:
             json.dump(vocab_data, f, indent=2)
 
     def read_vocab(self):
-        with open("bpe_tokenizer/vocab.json", "r") as vocab_file:
+        with open(vocab_path, "r") as vocab_file:
             data = json.load(vocab_file)
 
         self.id_to_token = {
