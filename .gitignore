@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+.qodo/
+datasets/recipe_ngl.csv
+datasets/wikitext/
+.DS_Store
