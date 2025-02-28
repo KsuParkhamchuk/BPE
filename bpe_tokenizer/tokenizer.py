@@ -15,7 +15,7 @@ from typing import List, Tuple
 from time import time
 
 curr_dir = os.path.dirname(os.path.abspath(__file__))
-vocab_path = os.path.join(curr_dir, "vocab.json")
+vocab_path = os.path.join(curr_dir, "domain_vocab.json")
 
 
 class BPETokenizer:

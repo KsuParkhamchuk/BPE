@@ -5,7 +5,7 @@ setup(
     version="0.1.0",
     packages=find_packages(),
     package_data={
-        "bpe_tokenizer": ["vocab.json"],
+        "bpe_tokenizer": ["vocab.json", "domain_vocab.json"],
     },
     include_package_data=True,
     install_requires=[

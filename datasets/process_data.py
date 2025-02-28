@@ -4,8 +4,7 @@ import csv
 import re
 
 recipeNLG_file = "datasets/recipe_ngl.csv"
-foodfacts_file = "datasets/foodfacts.tsv"
-pubmed_sport_file = "datasets/pubmed_sport.parquet"
+pubmed_sport_file = "datasets/pubmed/pubmed_sport.parquet"
 
 
 def clean_punctuation_spacing(text: str) -> str:
@@ -165,9 +164,16 @@ def process_csv():
 
         for row in csv_reader:
             clean_row = clean_recipengl("".join(row[col] for col in filters))
-            filtered_data.join(clean_row)
+            filtered_data += clean_row
 
-    return filtered_data.encode("utf-8")
+    sliced_data = filtered_data[0 : len(filtered_data) // 25]
+    # Get size information
+    data_size_bytes = len(sliced_data.encode("utf-8"))
+    data_size_mb = data_size_bytes / (1024 * 1024)
+
+    print(f"Filtered data size: {data_size_bytes:,} bytes ({data_size_mb:.2f} MB)")
+
+    return sliced_data.encode("utf-8")
 
 
 def process_scraped_text():
@@ -177,4 +183,4 @@ def process_scraped_text():
 
     content = "".join(item.as_py() for item in table.column("articles"))
 
-    return content.encode("utf-8")
+    return content[0 : len(content) // 2].encode("utf-8")

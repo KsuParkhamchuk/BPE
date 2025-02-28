@@ -17,13 +17,13 @@ def train_domain_specific():
     domain_specific_tokenizer = BPETokenizer()
     recipengl_data = process_csv()
     pubmed_data = process_scraped_text()
-    combined_data = recipengl_data.join(pubmed_data)
+    combined_data = recipengl_data + pubmed_data
     domain_specific_tokenizer.train(combined_data)
 
 
 def __main__():
     start = time()
-    train_general()
+    train_domain_specific()
     print(f"Training took: {time()-start:.2f} seconds")
 
 
