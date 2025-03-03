@@ -15,18 +15,20 @@ from typing import List, Tuple
 from time import time
 
 curr_dir = os.path.dirname(os.path.abspath(__file__))
-vocab_path = os.path.join(curr_dir, "domain_vocab.json")
+domain_vocab_path = os.path.join(curr_dir, "domain_vocab.json")
+general_vocab_path = os.path.join(curr_dir, "vocab.json")
 
 
 class BPETokenizer:
 
-    def __init__(self):
+    def __init__(self, mode):
         self.context_size = CONTEXT_SIZE
         self.vocab_size = TARGET_VOCABULARY_SIZE
         self.pattern = GPT4_SPLIT_PATTERN
         self.compiled_pattern = re.compile(self.pattern)
         self.unknown_token_id = UNKNOWN_TOKEN_ID
         self.pad_token_id = PAD_TOKEN_ID
+        self.mode = mode
 
     def init_vocabulary(self):
         self.special_tokens = [b"<PAD>", b"<UNK>"]
@@ -140,6 +142,7 @@ class BPETokenizer:
 
     def train(self, sequence: bytes):
         """Fill tokenizer vocabulary with n_merges"""
+        vocab_path = domain_vocab_path if self.mode == "domain" else general_vocab_path
         n_merges = TARGET_VOCABULARY_SIZE - BASE_VOCABULARY_SIZE
         sequence_chunks = list(re.findall(self.compiled_pattern, sequence))
         merges = {}
@@ -249,6 +252,7 @@ class BPETokenizer:
             json.dump(vocab_data, f, indent=2)
 
     def read_vocab(self):
+        vocab_path = domain_vocab_path if self.mode == "domain" else general_vocab_path
         with open(vocab_path, "r") as vocab_file:
             data = json.load(vocab_file)
 

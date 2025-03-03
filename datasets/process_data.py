@@ -166,7 +166,7 @@ def process_csv():
             clean_row = clean_recipengl("".join(row[col] for col in filters))
             filtered_data += clean_row
 
-    sliced_data = filtered_data[0 : len(filtered_data) // 25]
+    sliced_data = filtered_data[0 : len(filtered_data) // 75]
     # Get size information
     data_size_bytes = len(sliced_data.encode("utf-8"))
     data_size_mb = data_size_bytes / (1024 * 1024)
@@ -183,4 +183,4 @@ def process_scraped_text():
 
     content = "".join(item.as_py() for item in table.column("articles"))
 
-    return content[0 : len(content) // 2].encode("utf-8")
+    return content[0 : len(content)].encode("utf-8")

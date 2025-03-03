@@ -83,12 +83,12 @@ Training:
   Food recipes + Pubmed publications
 - Volume
 
-  _How much compute needed?_
+_How much compute needed?_
 
-  **Memory**:
+**Memory**:
 
-  Minimum RAM = 2×corpus_size (holds original + working copy)
-  Real-world overhead: Add 30% for Python/OS processes
+Minimum RAM = 2×corpus_size (holds original + working copy)
+Real-world overhead: Add 30% for Python/OS processes
 
 - Diversity
 
