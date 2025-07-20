@@ -141,7 +141,6 @@ class BPETokenizer:
         return processed_tokens
 
     def train(self, sequence: bytes):
-        """Fill tokenizer vocabulary with n_merges"""
         vocab_path = domain_vocab_path if self.mode == "domain" else general_vocab_path
         n_merges = TARGET_VOCABULARY_SIZE - BASE_VOCABULARY_SIZE
         sequence_chunks = list(re.findall(self.compiled_pattern, sequence))

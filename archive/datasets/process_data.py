@@ -183,4 +183,8 @@ def process_scraped_text():
 
     content = "".join(item.as_py() for item in table.column("articles"))
 
+    data_size_bytes = len(content.encode("utf-8"))
+    data_size_mb = data_size_bytes / (1024 * 1024)
+    print(f"Filtered data size: {data_size_bytes:,} bytes ({data_size_mb:.2f} MB)")
+
     return content[0 : len(content)].encode("utf-8")

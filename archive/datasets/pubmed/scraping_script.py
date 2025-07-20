@@ -1,4 +1,6 @@
 import requests
+import dis
+
 import pyarrow as pa
 import pyarrow.parquet as pq
 from datasets import clean_pubmed
@@ -88,6 +90,3 @@ def get_records():
     cleaned_data = clean_pubmed(all_text)
     table = pa.table({"articles": [cleaned_data]})
     pq.write_table(table, "datasets/pubmed/pubmed_sport.parquet")
-
-
-get_records()

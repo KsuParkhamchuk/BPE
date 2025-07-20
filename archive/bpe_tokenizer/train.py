@@ -1,4 +1,4 @@
-from bpe_tokenizer import BPETokenizer
+from .tokenizer import BPETokenizer
 from datasets import process_arrow, process_csv, process_scraped_text
 from time import time
 
@@ -23,20 +23,8 @@ def train_domain_specific():
 
 def __main__():
     start = time()
-    train_general()
+    train_domain_specific()
     print(f"Training took: {time()-start:.2f} seconds")
-    # tokenizer = BPETokenizer("domain")
-    # domain_sp_encoding = tokenizer.encode(sample2.encode("utf-8"))
-    # gen_tokenizer = BPETokenizer("general")
-    # general_encoding = gen_tokenizer.encode(sample2.encode("utf-8"))
-    # print(f"Domain: {domain_sp_encoding}")
-    # print(f"General: {general_encoding}")
-    # print(f"Domain specific encoding sequence length: {len(domain_sp_encoding)}")
-    # print(f"General encoding sequence length: {len(general_encoding)}")
-    # print(f"Ratio domain/general: {len(domain_sp_encoding)/len(general_encoding)}")
-
-    # print(tokenizer.decode(domain_sp_encoding))
-    # print(gen_tokenizer.decode(general_encoding))
 
 
 __main__()
