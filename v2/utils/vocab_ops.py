@@ -1,5 +1,8 @@
+"""Vocabulary operations"""
+
 import json
 from typing import Dict, List
+from constants import VOCAB_PATH
 
 
 def insert_special_tokens(vocab: Dict[str, int], special_tokens: List[str]):
@@ -37,11 +40,14 @@ def init_vocab(fpath: str, special_tokens: List[str]):
 
     save_vocab(vocab, fpath)
 
-    return vocab
+def update_vocab(vocab_update: Dict[bytes, int]):
+    """Writes the updated vocabulary to the vocabulary file"""
+    current_vocab = load_vocab(VOCAB_PATH)
+    current_vocab.update(vocab_update)
+    save_vocab(current_vocab, VOCAB_PATH)
 
-def update_vocab(vocab_update: Dict[str, int]):
-    pass
 
-
-def load_vocab():
-    pass
+def load_vocab(fpath: str):
+    """Returns existing vocabulary from the file in json object format"""
+    with open(fpath, "r", encoding="utf-8") as file:
+        return json.load(file)

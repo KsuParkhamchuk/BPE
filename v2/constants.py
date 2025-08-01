@@ -1,0 +1,1 @@
+VOCAB_PATH = "data/sample.txt"
